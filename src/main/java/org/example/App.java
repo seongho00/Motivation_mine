@@ -1,11 +1,8 @@
 package org.example;
 
 import org.example.motivation.controller.MotivationController;
-import org.example.motivation.entity.Motivation;
 import org.example.system.controller.SystemController;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -37,6 +34,8 @@ public class App {
                 motivationController.add();
             } else if (cmd.equals("list")) {
                 motivationController.list();
+            } else if (cmd.startsWith("delete")) {
+                motivationController.delete(cmd);
             } else {
                 System.out.println("사용할 수 없는 명령어야");
                 continue;

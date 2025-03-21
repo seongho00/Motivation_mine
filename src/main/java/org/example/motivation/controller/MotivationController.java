@@ -53,4 +53,28 @@ public class MotivationController {
 
         System.out.println("=".repeat(40));
     }
+
+    public void delete(String cmd) {
+        int id = Integer.parseInt(cmd.split(" ")[1]);
+
+        Motivation foundMotivation = null;
+        int foundIndex = -1;
+
+        for (int i = 0; i < motivations.size(); i++) {
+            Motivation motivation = motivations.get(i);
+            if (motivation.getId() == id) {
+                foundMotivation = motivation;
+                foundIndex = i;
+                break;
+            }
+        }
+
+        if (foundMotivation == null) {
+            System.out.println("해당 moti는 없던데????");
+            return;
+        }
+
+        motivations.remove(foundIndex);
+        System.out.println(id + "번 moti 삭제됨");
+    }
 }
