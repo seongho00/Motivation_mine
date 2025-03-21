@@ -17,13 +17,12 @@ public class App {
     void run() {
         System.out.println("== motivation 실행 ==");
 
-        MotivationController command = new MotivationController(sc);
+        MotivationController motivationController = new MotivationController(sc);
         SystemController systemController = new SystemController();
 
         while (true) {
             System.out.print("명령어) ");
             String cmd = sc.nextLine().trim();
-
 
             if (cmd.equals("exit")) {
                 systemController.end();
@@ -34,14 +33,16 @@ public class App {
             }
 
             if (cmd.equals("add")) {
-                command.reg();
+                motivationController.reg();
 
             } else if (cmd.equals("list")) {
-                command.list();
+                motivationController.list();
 
             } else if (cmd.contains("remove")) {
-                command.remove(cmd);
+                motivationController.remove(cmd);
 
+            } else if (cmd.contains("update")) {
+                motivationController.uqdate(cmd);
 
             } else {
                 System.out.println("등록되지 않은 명령어 입니다.");
