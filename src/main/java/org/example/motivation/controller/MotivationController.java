@@ -49,7 +49,10 @@ public class MotivationController {
 
 
         for (int i = mot.size() - 1; i >= 0; i--) {
-
+            if (mot.get(i).getSource().length() > 7) {
+                System.out.printf("%d / %s / %s\n", mot.get(i).getIndex(), mot.get(i).getSource().substring(0, 5) + "...", mot.get(i).getMotivation());
+                continue;
+            }
             System.out.printf("%d / %s / %s\n", mot.get(i).getIndex(), mot.get(i).getSource(), mot.get(i).getMotivation());
         }
 
