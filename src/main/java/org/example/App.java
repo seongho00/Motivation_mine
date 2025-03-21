@@ -22,8 +22,12 @@ public class App {
             System.out.print("명령어) ");
             String cmd = sc.nextLine().trim();
 
-            if (cmd.isEmpty()) {
+            if (cmd.equals("exit")) {
+                command.end();
+                break;
+            } else if (cmd.isEmpty()) {
                 System.out.println("명령어가 입력되지 않았습니다.");
+                continue;
             }
 
             if (cmd.equals("add")) {
@@ -33,13 +37,10 @@ public class App {
             } else if (cmd.contains("remove")) {
                 try {
                     List<String> a = new ArrayList<>(Arrays.asList(cmd.split(" ")));
-                    command.remove(Integer.parseInt(a.get(1)));
-                } catch (NumberFormatException e) {
+                    command.remove(Integer.parseInt(a.get(1).trim()));
+                } catch (Exception e) {
                     System.out.println("잘못된 명령어 입니다.");
                 }
-            } else if (cmd.equals("exit")) {
-                command.end();
-                break;
             } else {
                 System.out.println("잘못된 명령어 입니다.");
             }
@@ -66,13 +67,13 @@ class command {
         mot_list alist = new mot_list();
 
         System.out.print("motivation : ");
-        alist.motivation = sc.nextLine();
+        alist.setMotivation(sc.nextLine());
 
         System.out.print("source : ");
-        alist.source = sc.nextLine();
+        alist.setSource(sc.nextLine());
 
         index++;
-        alist.index = index;
+        alist.setIndex(index);
 
         mot.add(alist);
 
@@ -89,7 +90,7 @@ class command {
             System.out.println("번호 / source / motivation");
 
             for (int i = mot.size() - 1; i >= 0; i--) {
-                System.out.printf("%d / %s / %s\n", mot.get(i).index, mot.get(i).source, mot.get(i).motivation);
+                System.out.printf("%d / %s / %s\n", mot.get(i).getIndex(), mot.get(i).getSource(), mot.get(i).getMotivation());
             }
 
             System.out.println("=".repeat(50));
@@ -108,14 +109,39 @@ class command {
 
         } catch (IndexOutOfBoundsException e) {
             System.out.println(number + "번 motivation은 존재하지 않습니다.");
-            
+
         }
 
     }
 }
 
 class mot_list extends command {
-    int index;
-    String motivation;
-    String source;
+    private int index;
+    private String motivation;
+    private String source;
+
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public String getMotivation() {
+        return motivation;
+    }
+
+    public void setMotivation(String motivation) {
+        this.motivation = motivation;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 }
