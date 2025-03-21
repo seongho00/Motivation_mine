@@ -38,11 +38,11 @@ public class App {
             } else if (cmd.equals("list")) {
                 motivationController.list();
 
-            } else if (cmd.contains("remove")) {
-                motivationController.remove(cmd);
+            } else if (cmd.contains("delete")) { // contains 대신 startwith으로 해도 무방함.
+                motivationController.delete(cmd);
 
-            } else if (cmd.contains("update")) {
-                motivationController.uqdate(cmd);
+            } else if (cmd.contains("modify")) {
+                motivationController.modify(cmd);
 
             } else {
                 System.out.println("등록되지 않은 명령어 입니다.");

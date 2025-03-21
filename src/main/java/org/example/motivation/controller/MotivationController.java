@@ -61,26 +61,29 @@ public class MotivationController {
 
     }
 
-    public void remove(String cmd) {
+    public void delete(String cmd) {
         try {
             List<String> a = new ArrayList<>(Arrays.asList(cmd.split(" ")));
             int number = Integer.parseInt(a.get(1).trim());
-
-            try {
-                mot.remove(number - 1);
-                System.out.println(number + "번 Motivation이 삭제되었습니다.");
-
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println(number + "번 Motivation은 존재하지 않습니다.");
+            
+            for (int i = 0; i < mot.size(); i++) {
+                if (mot.get(i).getIndex() == number) {
+                    mot.remove(i);
+                    System.out.println(number + "번 Motivation을 삭제했습니다.");
+                    break;
+                }
             }
+
+            System.out.println(number + "번 Motivation은 존재하지 않습니다.");
+
         } catch (Exception e) {
-            System.out.println("remove 명령어가 잘못되었습니다.");
+            System.out.println("delete 명령어가 잘못되었습니다.");
         }
 
 
     }
 
-    public void uqdate(String cmd) {
+    public void modify(String cmd) {
         try {
             List<String> a = new ArrayList<>(Arrays.asList(cmd.split(" ")));
             int number = Integer.parseInt(a.get(1).trim());
@@ -99,7 +102,7 @@ public class MotivationController {
             }
 
         } catch (Exception e) {
-            System.out.println("update 명령어가 잘못되었습니다.");
+            System.out.println("modify 명령어가 잘못되었습니다.");
 
         }
     }
