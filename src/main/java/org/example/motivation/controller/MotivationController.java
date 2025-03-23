@@ -65,16 +65,20 @@ public class MotivationController {
         try {
             List<String> a = new ArrayList<>(Arrays.asList(cmd.split(" ")));
             int number = Integer.parseInt(a.get(1).trim());
-            
+            int isRemove = 0;
+
             for (int i = 0; i < mot.size(); i++) {
                 if (mot.get(i).getIndex() == number) {
-                    mot.remove(i);
+                    mot.remove(mot.get(i));
                     System.out.println(number + "번 Motivation을 삭제했습니다.");
+                    isRemove++;
                     break;
                 }
             }
 
-            System.out.println(number + "번 Motivation은 존재하지 않습니다.");
+            if (isRemove == 0) {
+                System.out.println(number + "번 Motivation은 존재하지 않습니다.");
+            }
 
         } catch (Exception e) {
             System.out.println("delete 명령어가 잘못되었습니다.");
@@ -88,17 +92,24 @@ public class MotivationController {
             List<String> a = new ArrayList<>(Arrays.asList(cmd.split(" ")));
             int number = Integer.parseInt(a.get(1).trim());
 
-            try {
-                System.out.print("Motivation : ");
-                mot.get(number - 1).setMotivation(sc.nextLine());
+            int isModify = 0;
 
-                System.out.print("Source : ");
-                mot.get(number - 1).setSource(sc.nextLine());
+            for (mot_list motlist : mot) {
+                if (motlist.getIndex() == number) {
+                    System.out.print("Motivation : ");
+                    motlist.setMotivation(sc.nextLine());
 
-                System.out.println(number + "번 motivation이 수정되었습니다.");
+                    System.out.print("Source : ");
+                    motlist.setSource(sc.nextLine());
 
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println(number + "번 motivation은 존재하지 않습니다.");
+                    System.out.println(number + "번 motivation이 수정되었습니다.");
+                    isModify++;
+                    break;
+                }
+            }
+
+            if (isModify == 0) {
+                System.out.println(number + "번 Motivation은 존재하지 않습니다.");
             }
 
         } catch (Exception e) {
