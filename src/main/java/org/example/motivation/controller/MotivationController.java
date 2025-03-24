@@ -64,7 +64,13 @@ public class MotivationController {
     public void delete(String cmd) {
         try {
             List<String> a = new ArrayList<>(Arrays.asList(cmd.split(" ")));
-            int number = Integer.parseInt(a.get(1).trim());
+            int number = 0;
+            if (cmd.startsWith("delete?id=")) {
+                List<String> b = new ArrayList<>(Arrays.asList(cmd.split("")));
+                number = Integer.parseInt(b.get(10));
+            } else {
+                number = Integer.parseInt(a.get(1).trim());
+            }
             int isRemove = 0;
 
             for (int i = 0; i < mot.size(); i++) {
