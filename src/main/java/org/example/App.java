@@ -7,22 +7,17 @@ import org.example.motivation.controller.MotivationController;
 import java.util.Scanner;
 
 public class App {
-    private Scanner sc;
 
-    public App(Scanner sc) {
-        this.sc = sc;
-
-    }
 
     void run() {
         System.out.println("== motivation 실행 ==");
 
-        MotivationController motivationController = new MotivationController(sc);
+        MotivationController motivationController = new MotivationController(Container.getScanner());
         SystemController systemController = new SystemController();
 
         while (true) {
             System.out.print("명령어) ");
-            String cmd = sc.nextLine().trim();
+            String cmd = Container.getScanner().nextLine().trim();
 
             if (cmd.equals("exit")) {
                 systemController.end();

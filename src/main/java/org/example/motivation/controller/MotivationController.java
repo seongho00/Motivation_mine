@@ -64,10 +64,10 @@ public class MotivationController {
     public void delete(String cmd) {
         try {
             List<String> a = new ArrayList<>(Arrays.asList(cmd.split(" ")));
-            int number = 0;
+            int number;
             if (cmd.startsWith("delete?id=")) {
-                List<String> b = new ArrayList<>(Arrays.asList(cmd.split("")));
-                number = Integer.parseInt(b.get(10));
+                List<String> b = new ArrayList<>(Arrays.asList(cmd.split("=")));
+                number = Integer.parseInt(b.get(1).trim());
             } else {
                 number = Integer.parseInt(a.get(1).trim());
             }
@@ -89,8 +89,6 @@ public class MotivationController {
         } catch (Exception e) {
             System.out.println("delete 명령어가 잘못되었습니다.");
         }
-
-
     }
 
     public void modify(String cmd) {
