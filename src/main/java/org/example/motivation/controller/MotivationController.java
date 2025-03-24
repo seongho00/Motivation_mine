@@ -99,4 +99,65 @@ public class MotivationController {
 
 
     }
+
+    public void edit(String cmd) {
+        int id;
+        try {
+            id = Integer.parseInt(cmd.split(" ")[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("명령어 확인해라");
+            return;
+        }
+
+        Motivation foundMotivation = findById(id);
+
+        if (foundMotivation == null) {
+            System.out.println("해당 moti는 없던데????");
+            return;
+        }
+
+        // 찾은 motivation의 인스턴스 변수에 접근
+        System.out.println("body(기존) : " + foundMotivation.getBody());
+        System.out.println("source(기존) : " + foundMotivation.getSource());
+
+        String newBody;
+        String newSource;
+        // 수정사항 입력받기
+        while (true) {
+            System.out.print("new body : ");
+            newBody = Container.getScanner().nextLine().trim();
+
+            if (newBody.length() != 0) {
+                break;
+            }
+            System.out.println("수정사항(body) 입력해");
+        }
+
+        while (true) {
+            System.out.print("new source : ");
+            newSource = Container.getScanner().nextLine();
+
+            if (newSource.length() != 0) {
+                break;
+            }
+            System.out.println("수정사항(source) 입력해");
+        }
+
+        // 찾은 motivation의 인스턴스 변수 값 수정
+        foundMotivation.setBody(newBody);
+        foundMotivation.setSource(newSource);
+
+        System.out.println(id + "번 moti 수정됨");
+
+    }
+
+    // 명령어의 id 와 일치하는 motivation 찾기
+    private Motivation findById(int id) {
+        for (Motivation motivation : motivations) {
+            if (motivation.getId() == id) {
+                return motivation;
+            }
+        }
+        return null;
+    }
 }
