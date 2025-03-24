@@ -2,9 +2,7 @@ package org.example.motivation.controller;
 
 import org.example.motivation.entity.Motivation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class MotivationController {
 
@@ -76,5 +74,33 @@ public class MotivationController {
 
         motivations.remove(foundIndex);
         System.out.println(id + "번 moti 삭제됨");
+    }
+
+
+    public void newDelete(String cmd) {
+        Rq rq = new Rq(cmd);
+
+        System.out.println("rq.getParams(\"id\") : " + rq.getParams("id"));
+
+        int id = Integer.parseInt(rq.getParams("id"));
+
+        Motivation foundMotivation = null;
+
+        for (Motivation motivation : motivations) {
+            if (motivation.getId() == id) {
+                foundMotivation = motivation;
+                break;
+            }
+        }
+
+        if (foundMotivation == null) {
+            System.out.println("해당 moti는 없던데????");
+            return;
+        }
+
+        motivations.remove(foundMotivation);
+        System.out.println(id + "번 moti 삭제됨");
+
+
     }
 }

@@ -34,6 +34,8 @@ public class App {
                 motivationController.add();
             } else if (cmd.equals("list")) {
                 motivationController.list();
+            } else if (cmd.startsWith("delete?")) {
+                motivationController.newDelete(cmd);
             } else if (cmd.startsWith("delete")) {
                 motivationController.delete(cmd);
             } else {
