@@ -1,5 +1,6 @@
 package org.example.motivation.controller;
 
+import org.example.Container;
 import org.example.motivation.entity.mot_list;
 
 import java.util.ArrayList;
@@ -12,22 +13,15 @@ public class MotivationController {
 
     List<mot_list> mot = new ArrayList<>();
 
-    Scanner sc;
-
-    public MotivationController(Scanner sc) {
-        this.sc = sc;
-    }
-
-
     public void reg() {
 
         mot_list mot_list = new mot_list();
 
         System.out.print("Motivation : ");
-        mot_list.setMotivation(sc.nextLine());
+        mot_list.setMotivation(Container.getScanner().nextLine());
 
         System.out.print("Source : ");
-        mot_list.setSource(sc.nextLine());
+        mot_list.setSource(Container.getScanner().nextLine());
 
         index++;
         mot_list.setIndex(index);
@@ -91,7 +85,7 @@ public class MotivationController {
         }
     }
 
-    public void modify(String cmd) {
+    public void edit(String cmd) {
         try {
             List<String> a = new ArrayList<>(Arrays.asList(cmd.split(" ")));
             int number = Integer.parseInt(a.get(1).trim());
@@ -100,11 +94,30 @@ public class MotivationController {
 
             for (mot_list motlist : mot) {
                 if (motlist.getIndex() == number) {
-                    System.out.print("Motivation : ");
-                    motlist.setMotivation(sc.nextLine());
+                    System.out.println("Motivation : " + motlist.getMotivation());
+                    System.out.println("Source : " + motlist.getSource());
 
-                    System.out.print("Source : ");
-                    motlist.setSource(sc.nextLine());
+                    while (true) {
+                        System.out.print("Motivation : ");
+                        motlist.setMotivation(Container.getScanner().nextLine().trim());
+
+                        if (motlist.getMotivation().isEmpty()) {
+                            System.out.println("Motivation이 입력되지 않았습니다.");
+                            continue;
+                        }
+                        break;
+
+                    }
+                    while (true) {
+                        System.out.print("Source : ");
+                        motlist.setSource(Container.getScanner().nextLine().trim());
+
+                        if (motlist.getSource().isEmpty()) {
+                            System.out.println("Source가 입력되지 않았습니다.");
+                            continue;
+                        }
+                        break;
+                    }
 
                     System.out.println(number + "번 motivation이 수정되었습니다.");
                     isModify++;

@@ -8,11 +8,10 @@ import java.util.Scanner;
 
 public class App {
 
-
     void run() {
         System.out.println("== motivation 실행 ==");
 
-        MotivationController motivationController = new MotivationController(Container.getScanner());
+        MotivationController motivationController = new MotivationController();
         SystemController systemController = new SystemController();
 
         while (true) {
@@ -36,8 +35,8 @@ public class App {
             } else if (cmd.contains("delete")) { // contains 대신 startwith으로 해도 무방함.
                 motivationController.delete(cmd);
 
-            } else if (cmd.contains("modify")) {
-                motivationController.modify(cmd);
+            } else if (cmd.contains("edit")) {
+                motivationController.edit(cmd);
 
             } else {
                 System.out.println("등록되지 않은 명령어 입니다.");
